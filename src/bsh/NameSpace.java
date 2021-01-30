@@ -821,6 +821,16 @@ public class NameSpace implements Serializable, BshClassManager.Listener, NameSo
     }
 
 	/**
+	 * Remove an imported package, if present.
+	 */
+	public void unimportPackage(String name) {
+		if (importedPackages != null) {
+			if (importedPackages.remove(name))
+				nameSpaceChanged();
+		}
+	}
+
+	/**
 		Import scripted or compiled BeanShell commands in the following package
 		in the classpath.  You may use either "/" path or "." package notation.
 		e.g. importCommands("/bsh/commands") or importCommands("bsh.commands")
@@ -847,6 +857,25 @@ public class NameSpace implements Serializable, BshClassManager.Listener, NameSo
 		importedCommands.add(name);
 		nameSpaceChanged();
     }
+
+	/**
+	 * Unimport a commands package name, if present.
+	 */
+	public void unimportCommands(String name) {
+		if (importedCommands != null) {
+			// dots to slashes
+			name = name.replace('.','/');
+			// absolute
+			if ( !name.startsWith("/") )
+				name = "/"+name;
+			// remove trailing (but preserve case of simple "/")
+			if ( name.length() > 1 && name.endsWith("/") )
+				name = name.substring( 0, name.length()-1 );
+			
+			if (importedCommands.remove(name))
+				nameSpaceChanged();
+		}
+	}
 
 	/**
 		A command is a scripted method or compiled command class implementing a 
