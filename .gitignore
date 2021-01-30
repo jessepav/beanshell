@@ -34,3 +34,5 @@ Thumbs.db
 *.iws
 *.iml
 
+javadoc
+docs/manual/bshcommands-bshdoc.xml
