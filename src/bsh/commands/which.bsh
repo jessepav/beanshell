@@ -31,7 +31,6 @@ import bsh.ClassIdentifier;
 which( clas ) 
 {
 	// make the class into a name
-	Class clas;
 	if ( clas instanceof ClassIdentifier )
 		clas = this.namespace.identifierToClass( clas );
 	if ( clas instanceof Class )
