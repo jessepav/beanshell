@@ -657,7 +657,7 @@ public class BshClassPath
 				if (rtjar == null) {
 					bootClassPath = new BshClassPath("empty class path");
 				} else {
-					URL url = new File(rtjar).toURI().toURL();
+					URL url = new URL("file:" + rtjar);
 					bootClassPath = new BshClassPath("Boot Class Path", new URL[]{url});
 				}
 			} catch ( MalformedURLException e ) {
